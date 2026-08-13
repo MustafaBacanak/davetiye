@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rafel & Mustafa — Düğün Davetiyesi</title>
+  <meta name="description" content="Rafel & Mustafa Düğün Davetiyesi — 6 Eylül 2026">
+  <meta property="og:title" content="Rafel & Mustafa — Düğün Davetiyesi">
+  <meta property="og:description" content="6 Eylül 2026 | Saat 19:00 | Studio Necati Çekim Platosu, Suluova, Amasya">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #b8860b;
+      --gold-light: #d4a843;
+      --cream: #faf8f0;
+      --cream-dark: #f0ead6;
+      --green-dark: #2d4a22;
+      --green-mid: #4a7c3f;
+      --green-light: #6b9b5e;
+      --text-dark: #3a3a2e;
+      --text-mid: #6b6b5e;
+      --text-light: #8a8a7e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ==================== ENVELOPE INTRO ==================== */
+    #envelope-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(145deg, #f5f0e1 0%, #e8dcc8 50%, #f5f0e1 100%);
+      cursor: pointer;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #envelope-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .envelope-container {
+      position: relative;
+      width: 280px;
+      height: 200px;
+      perspective: 800px;
+    }
+
+    .envelope-body {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(180deg, #e8dcc8 0%, #d4c4a8 100%);
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      z-index: 2;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(180deg, #d4c4a8 0%, #c8b898 100%);
+      clip-path: polygon(0 0, 50% 70%, 100% 0);
+      transform-origin: top center;
+      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 3;
+    }
+
+    .envelope-container.open .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-seal {
+      position: absolute;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background: radial-gradient(circle, var(--gold-light) 0%, var(--gold) 60%, #8b6914 100%);
+      border-radius: 50%;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      transition: opacity 0.5s ease;
+    }
+
+    .envelope-container.open .envelope-seal { opacity: 0; }
+
+    .envelope-seal-text {
+      font-family: 'Great Vibes', cursive;
+      color: #faf8f0;
+      font-size: 22px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .letter {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 240px;
+      height: 140px;
+      background: white;
+      border-radius: 4px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .envelope-container.open .letter {
+      transform: translateX(-50%) translateY(-180px);
+    }
+
+    .letter-preview {
+      font-family: 'Great Vibes', cursive;
+      font-size: 20px;
+      color: var(--gold);
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .tap-text {
+      margin-top: 40px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      color: var(--text-light);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ==================== LEAVES DECORATION ==================== */
+    .leaves-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 180px;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .leaf {
+      position: absolute;
+      font-size: 0;
+    }
+
+    .leaves-top::before, .leaves-top::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(ellipse at top, var(--green-dark) 0%, transparent 70%);
+      opacity: 0.15;
+    }
+
+    .leaves-top::before { left: -40px; transform: rotate(-15deg); }
+    .leaves-top::after { right: -40px; transform: rotate(15deg); }
+
+    /* ==================== MAIN CONTENT ==================== */
+    #main-content {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    #main-content.visible { opacity: 1; }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 24px;
+      position: relative;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 50%, var(--cream) 100%);
+      overflow: hidden;
+    }
+
+    .hero::before, .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 400px;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    .hero::before {
+      top: 0;
+      right: -50px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150'%3E%3Cpath d='M80 0 C70 30 50 50 30 80 C20 95 10 110 20 130 C30 150 60 140 70 120 C80 100 90 70 85 40 C82 20 80 10 80 0Z' fill='%232d4a22'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
+      transform: rotate(15deg);
+    }
+
+    .hero::after {
+      top: 0;
+      left: -50px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 150'%3E%3Cpath d='M20 0 C30 30 50 50 70 80 C80 95 90 110 80 130 C70 150 40 140 30 120 C20 100 10 70 15 40 C18 20 20 10 20 0Z' fill='%232d4a22'/%3E%3C/svg%3E") no-repeat center;
+      background-size: contain;
+      transform: rotate(-15deg);
+    }
+
+    .ornament-top {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease forwards 0.3s;
+    }
+
+    .couple-names {
+      text-align: center;
+      opacity: 0;
+      animation: fadeSlideDown 1.2s ease forwards 0.5s;
+    }
+
+    .couple-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(52px, 12vw, 80px);
+      color: var(--green-dark);
+      line-height: 1.1;
+      display: block;
+    }
+
+    .couple-amp {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(36px, 8vw, 56px);
+      color: var(--gold);
+      display: block;
+      margin: -5px 0;
+    }
+
+    .invitation-text {
+      text-align: center;
+      max-width: 420px;
+      margin: 30px auto;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--text-mid);
+      font-style: italic;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease forwards 0.9s;
+    }
+
+    .rings-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease forwards 1.1s;
+    }
+
+    .rings-divider .line {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold-light));
+    }
+
+    .rings-divider .line:last-child {
+      background: linear-gradient(90deg, var(--gold-light), transparent);
+    }
+
+    .rings-icon {
+      font-size: 24px;
+      color: var(--gold);
+    }
+
+    /* ==================== FAMILIES ==================== */
+    .families {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin: 10px 0 30px;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease forwards 1.3s;
+    }
+
+    .family {
+      text-align: center;
+    }
+
+    .family-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* ==================== DATE & VENUE ==================== */
+    .details-section {
+      padding: 60px 24px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--cream) 0%, white 50%, var(--cream) 100%);
+    }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 12px;
+    }
+
+    .date-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 10vw, 64px);
+      font-weight: 400;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+
+    .date-separator {
+      display: inline-block;
+      width: 24px;
+      color: var(--gold);
+      font-weight: 300;
+    }
+
+    .time-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 8vw, 52px);
+      font-weight: 400;
+      color: var(--gold);
+      margin: 20px 0;
+    }
+
+    .venue-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-dark);
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .venue-address {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 1px;
+    }
+
+    /* ==================== COUNTDOWN ==================== */
+    .countdown-section {
+      padding: 60px 24px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
+    }
+
+    .countdown-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(28px, 6vw, 40px);
+      color: var(--green-dark);
+      margin-bottom: 30px;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: clamp(16px, 4vw, 32px);
+      flex-wrap: wrap;
+    }
+
+    .countdown-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 70px;
+    }
+
+    .countdown-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 8vw, 56px);
+      font-weight: 400;
+      color: var(--green-dark);
+      line-height: 1;
+      min-width: 70px;
+      text-align: center;
+    }
+
+    .countdown-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 8px;
+    }
+
+    .countdown-colon {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 7vw, 48px);
+      color: var(--gold-light);
+      align-self: flex-start;
+      margin-top: 4px;
+      opacity: 0.5;
+    }
+
+    /* ==================== CALENDAR ==================== */
+    .calendar-section {
+      padding: 40px 24px 60px;
+      text-align: center;
+      background: var(--cream-dark);
+    }
+
+    .mini-calendar {
+      display: inline-block;
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+    }
+
+    .cal-month {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin-bottom: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 36px);
+      gap: 2px;
+      justify-content: center;
+    }
+
+    .cal-day-header {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-light);
+      text-align: center;
+      padding: 6px 0;
+      letter-spacing: 1px;
+    }
+
+    .cal-day {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      text-align: center;
+      padding: 7px 0;
+      color: var(--text-mid);
+      border-radius: 50%;
+    }
+
+    .cal-day.empty { visibility: hidden; }
+
+    .cal-day.highlight {
+      background: var(--gold);
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(184,134,11,0.3);
+    }
+
+    .cal-day.today {
+      border: 2px solid var(--green-mid);
+      font-weight: 500;
+    }
+
+    /* ==================== MAP ==================== */
+    .map-section {
+      padding: 60px 24px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--cream-dark) 0%, var(--cream) 100%);
+    }
+
+    .map-container {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      margin: 20px auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* ==================== BUTTONS ==================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: white;
+      box-shadow: 0 4px 16px rgba(184,134,11,0.3);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(184,134,11,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--green-dark);
+      border: 2px solid var(--green-mid);
+    }
+
+    .btn-outline:hover {
+      background: var(--green-dark);
+      color: white;
+      border-color: var(--green-dark);
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      padding: 40px 24px;
+      text-align: center;
+      background: var(--cream);
+    }
+
+    .footer-heart {
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .footer-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 28px;
+      color: var(--green-dark);
+    }
+
+    .footer-date {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: var(--text-light);
+      letter-spacing: 3px;
+      margin-top: 8px;
+    }
+
+    /* ==================== ANIMATIONS ==================== */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================== MUSIC TOGGLE ==================== */
+    .music-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid var(--gold-light);
+      cursor: pointer;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      font-size: 20px;
+    }
+
+    .music-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    .music-toggle.playing .bar {
+      animation: soundBar 0.6s ease-in-out infinite alternate;
+    }
+
+    .music-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 2px;
+      height: 18px;
+    }
+
+    .bar {
+      width: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: height 0.3s ease;
+    }
+
+    .bar:nth-child(1) { height: 6px; animation-delay: 0s; }
+    .bar:nth-child(2) { height: 12px; animation-delay: 0.15s; }
+    .bar:nth-child(3) { height: 8px; animation-delay: 0.3s; }
+    .bar:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+
+    .music-toggle:not(.playing) .bar { height: 4px !important; animation: none !important; }
+
+    @keyframes soundBar {
+      0% { height: 4px; }
+      100% { height: 18px; }
+    }
+
+    /* ==================== SCROLL INDICATOR ==================== */
+    .scroll-hint {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease forwards 2s;
+    }
+
+    .scroll-hint span {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+
+    .scroll-arrow {
+      width: 20px;
+      height: 20px;
+      border-right: 2px solid var(--gold-light);
+      border-bottom: 2px solid var(--gold-light);
+      transform: rotate(45deg);
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollBounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50% { transform: rotate(45deg) translateY(6px); }
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 480px) {
+      .families { gap: 30px; }
+      .cal-grid { grid-template-columns: repeat(7, 32px); }
+      .countdown-grid { gap: 12px; }
+      .map-container { height: 250px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== ENVELOPE SCREEN ==================== -->
+  <div id="envelope-screen">
+    <div class="envelope-container" id="envelope">
+      <div class="envelope-flap"></div>
+      <div class="envelope-seal">
+        <span class="envelope-seal-text">R&M</span>
+      </div>
+      <div class="letter">
+        <div class="letter-preview">
+          Rafel & Mustafa<br>
+          <span style="font-size: 14px; color: #8a8a7e;">06.09.2026</span>
+        </div>
+      </div>
+      <div class="envelope-body"></div>
+    </div>
+    <p class="tap-text">Davetiyeyi açmak için dokun</p>
+  </div>
+
+  <!-- ==================== MAIN INVITATION ==================== -->
+  <div id="main-content">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="ornament-top"></div>
+
+      <div class="couple-names">
+        <span class="couple-name">Rafel</span>
+        <span class="couple-amp">&</span>
+        <span class="couple-name">Mustafa</span>
+      </div>
+
+      <p class="invitation-text">
+        Özel günler birlikte güzel..<br>
+        Bu özel günümüzde sizleri de aramızda<br>
+        görmekten mutluluk duyarız.
+      </p>
+
+      <div class="rings-divider">
+        <div class="line"></div>
+        <span class="rings-icon">💍</span>
+        <div class="line"></div>
+      </div>
+
+      <div class="families">
+        <div class="family">
+          <div class="family-names">Hamiyet & Hüseyin</div>
+        </div>
+        <div class="family">
+          <div class="family-names">Büşra & Şevki</div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <span>Aşağı kaydır</span>
+        <div class="scroll-arrow"></div>
+      </div>
+    </section>
+
+    <!-- DATE & VENUE -->
+    <section class="details-section reveal">
+      <p class="section-label">Düğün Tarihi</p>
+      <div class="date-display">
+        06<span class="date-separator">|</span>09<span class="date-separator">|</span>2026
+      </div>
+
+      <p class="section-label" style="margin-top: 30px;">Saat</p>
+      <div class="time-display">19.00</div>
+
+      <p class="section-label">Düğün Yeri</p>
+      <div class="venue-name">Studio Necati Çekim Platosu</div>
+      <div class="venue-address">Harmanaağlı, Suluova, Amasya</div>
+    </section>
+
+    <!-- COUNTDOWN -->
+    <section class="countdown-section reveal">
+      <h2 class="countdown-title">Düğünümüze Son</h2>
+      <div class="countdown-grid" id="countdown">
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-days">--</span>
+          <span class="countdown-label">Gün</span>
+        </div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-hours">--</span>
+          <span class="countdown-label">Saat</span>
+        </div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-minutes">--</span>
+          <span class="countdown-label">Dakika</span>
+        </div>
+        <span class="countdown-colon">:</span>
+        <div class="countdown-item">
+          <span class="countdown-number" id="cd-seconds">--</span>
+          <span class="countdown-label">Saniye</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section class="calendar-section reveal">
+      <p class="section-label">Tarihimizi Kaydedin</p>
+      <div class="mini-calendar">
+        <div class="cal-month">Eylül 2026</div>
+        <div class="cal-grid" id="calendar-grid"></div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-gold" id="btn-gcal" target="_blank" rel="noopener">
+          📅 Google Takvime Ekle
+        </a>
+        <a class="btn btn-outline" id="btn-ical" download="rafel-mustafa-dugun.ics">
+          🍎 Apple Takvime Ekle
+        </a>
+      </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="map-section reveal">
+      <p class="section-label">Konum</p>
+      <h3 class="venue-name">Studio Necati Çekim Platosu</h3>
+      <p class="venue-address" style="margin-bottom: 0;">Harmanaağlı, Suluova, Amasya</p>
+      <div class="map-container" id="map-container">
+        <!-- Lazy-loaded -->
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-gold"
+           href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40870d08bf351583:0xda55155485726295!3e0"
+           target="_blank" rel="noopener">
+          📍 Yol Tarifi Al
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer reveal">
+      <div class="footer-heart">♥</div>
+      <div class="footer-names">Rafel & Mustafa</div>
+      <div class="footer-date">06 . 09 . 2026</div>
+    </footer>
+  </div>
+
+  <!-- MUSIC TOGGLE -->
+  <button class="music-toggle" id="music-toggle" title="Müzik Aç/Kapat" style="display:none;">
+    <div class="music-bars">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+  </button>
+
+  <script>
+    // ==================== ENVELOPE ====================
+    const envelopeScreen = document.getElementById('envelope-screen');
+    const envelope = document.getElementById('envelope');
+    const mainContent = document.getElementById('main-content');
+
+    envelopeScreen.addEventListener('click', () => {
+      envelope.classList.add('open');
+      setTimeout(() => {
+        envelopeScreen.classList.add('hidden');
+        mainContent.classList.add('visible');
+        document.body.style.overflow = 'auto';
+      }, 1400);
+    });
+
+    document.body.style.overflow = 'hidden';
+
+    // ==================== COUNTDOWN ====================
+    const weddingDate = new Date('2026-09-06T19:00:00+03:00');
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = weddingDate - now;
+
+      if (diff <= 0) {
+        document.getElementById('cd-days').textContent = '0';
+        document.getElementById('cd-hours').textContent = '0';
+        document.getElementById('cd-minutes').textContent = '0';
+        document.getElementById('cd-seconds').textContent = '0';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('cd-days').textContent = days;
+      document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ==================== CALENDAR ====================
+    (function buildCalendar() {
+      const grid = document.getElementById('calendar-grid');
+      const headers = ['PZT', 'SAL', 'ÇAR', 'PER', 'CUM', 'CMT', 'PZR'];
+      headers.forEach(h => {
+        const el = document.createElement('div');
+        el.className = 'cal-day-header';
+        el.textContent = h;
+        grid.appendChild(el);
+      });
+
+      // September 2026: starts on Tuesday (day index 1 in 0-based Mon start = index 1)
+      const firstDay = new Date(2026, 8, 1).getDay(); // 0=Sun
+      const startOffset = firstDay === 0 ? 6 : firstDay - 1; // Convert to Mon-start
+      const daysInMonth = 30;
+      const today = new Date();
+
+      for (let i = 0; i < startOffset; i++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day empty';
+        grid.appendChild(el);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const el = document.createElement('div');
+        el.className = 'cal-day';
+        el.textContent = d;
+        if (d === 6) el.classList.add('highlight');
+        if (today.getFullYear() === 2026 && today.getMonth() === 8 && today.getDate() === d) {
+          el.classList.add('today');
+        }
+        grid.appendChild(el);
+      }
+    })();
+
+    // ==================== CALENDAR LINKS ====================
+    (function setupCalendarLinks() {
+      const gcalUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+        '&text=' + encodeURIComponent('Rafel & Mustafa Düğünü') +
+        '&dates=20260906T160000Z/20260906T210000Z' +
+        '&details=' + encodeURIComponent('Rafel & Mustafa Düğün Töreni') +
+        '&location=' + encodeURIComponent('Studio Necati Çekim Platosu, Harmanaağlı, Suluova, Amasya');
+      document.getElementById('btn-gcal').href = gcalUrl;
+
+      const icsContent = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Rafel&Mustafa//Dugun//TR',
+        'BEGIN:VEVENT',
+        'DTSTART:20260906T160000Z',
+        'DTEND:20260906T210000Z',
+        'SUMMARY:Rafel & Mustafa Düğünü',
+        'DESCRIPTION:Rafel & Mustafa Düğün Töreni',
+        'LOCATION:Studio Necati Çekim Platosu\\, Harmanaağlı\\, Suluova\\, Amasya',
+        'END:VEVENT',
+        'END:VCALENDAR'
+      ].join('\r\n');
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      document.getElementById('btn-ical').href = URL.createObjectURL(blob);
+    })();
+
+    // ==================== LAZY MAP ====================
+    const mapObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const container = document.getElementById('map-container');
+          container.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3000!2d35.7476669!3d40.7412282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40870d08bf351583%3A0xda55155485726295!2sStudio%20Necati%20%C3%87ekim%20Platosu!5e0!3m2!1str!2str" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>';
+          mapObserver.disconnect();
+        }
+      });
+    }, { rootMargin: '200px' });
+
+    mapObserver.observe(document.getElementById('map-container'));
+
+    // ==================== SCROLL REVEAL ====================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+  </script>
+</body>
+</html>
