@@ -713,13 +713,13 @@
       height: 20px;
       border-right: 2px solid var(--gold-light);
       border-bottom: 2px solid var(--gold-light);
-      transform: rotate(45deg);
+      transform: rotate(45deg) translate(-1px, -1px);
       animation: scrollBounce 2s ease-in-out infinite;
     }
 
     @keyframes scrollBounce {
-      0%, 100% { transform: rotate(45deg) translateY(0); }
-      50% { transform: rotate(45deg) translateY(6px); }
+      0%, 100% { transform: rotate(45deg) translate(-1px, -1px); }
+      50% { transform: rotate(45deg) translate(-1px, 5px); }
     }
 
     /* ==================== RESPONSIVE ==================== */
