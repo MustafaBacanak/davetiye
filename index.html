@@ -390,9 +390,25 @@
       letter-spacing: 1px;
     }
 
+    .weather-note {
+      width: min(420px, 100%);
+      margin: 24px auto 0;
+      padding: 16px 18px;
+      border: 1px solid rgba(184, 134, 11, 0.34);
+      border-radius: 999px;
+      background: rgba(250, 248, 240, 0.78);
+      color: var(--green-dark);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.42;
+      box-shadow: 0 10px 26px rgba(184, 134, 11, 0.08);
+    }
+
     /* ==================== COUNTDOWN ==================== */
     .countdown-section {
-      padding: 60px 24px;
+      padding: 42px 24px 60px;
       text-align: center;
       background: linear-gradient(180deg, var(--cream) 0%, var(--cream-dark) 100%);
     }
@@ -730,6 +746,11 @@
       .cal-grid { grid-template-columns: repeat(7, 32px); }
       .countdown-grid { gap: 12px; }
       .map-container { height: 250px; }
+      .weather-note {
+        border-radius: 18px;
+        font-size: 17px;
+        padding: 14px 16px;
+      }
     }
   </style>
 </head>
@@ -806,6 +827,7 @@
       <p class="section-label" style="margin-top: 24px;">Düğün Yeri</p>
       <div class="venue-name">Studio Necati Çekim Platosu</div>
       <div class="venue-address">Harmanaağlı, Suluova, Amasya</div>
+      <p class="weather-note">Akşam saatlerinde hava serin olabilir. Hazırlıklı gelmenizi tavsiye ederiz.</p>
     </section>
 
     <!-- COUNTDOWN -->
@@ -999,7 +1021,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const container = document.getElementById('map-container');
-          container.innerHTML = '<iframe src="https://www.google.com/maps?q=40.7443428,35.7488365&z=17&output=embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>';
+          container.innerHTML = '<iframe src="https://www.google.com/maps?q=40.7443428,35.7488365&z=15&output=embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>';
           mapObserver.disconnect();
         }
       });
