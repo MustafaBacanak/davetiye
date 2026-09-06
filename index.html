@@ -805,7 +805,7 @@
 
       <p class="section-label" style="margin-top: 24px;">Düğün Yeri</p>
       <div class="venue-name">Studio Necati Çekim Platosu</div>
-      <div class="venue-address">Harmanaağlı, Suluova, Amasya</div>
+      <div class="venue-address">40°44'39.6"N 35°44'55.8"E</div>
     </section>
 
     <!-- COUNTDOWN -->
@@ -855,13 +855,13 @@
     <section class="map-section reveal">
       <p class="section-label">Konum</p>
       <h3 class="venue-name">Studio Necati Çekim Platosu</h3>
-      <p class="venue-address" style="margin-bottom: 0;">Harmanaağlı, Suluova, Amasya</p>
+      <p class="venue-address" style="margin-bottom: 0;">40°44'39.6"N 35°44'55.8"E</p>
       <div class="map-container" id="map-container">
         <!-- Lazy-loaded -->
       </div>
       <div class="btn-group">
         <a class="btn btn-gold"
-           href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x40870d08bf351583:0xda55155485726295!3e0"
+           href="https://www.google.com/maps/dir/?api=1&destination=40.7443428,35.7488365"
            target="_blank" rel="noopener">
           📍 Yol Tarifi Al
         </a>
@@ -973,7 +973,7 @@
         '&text=' + encodeURIComponent('Rafel & Mustafa Düğünü') +
         '&dates=20260906T160000Z/20260906T210000Z' +
         '&details=' + encodeURIComponent('Rafel & Mustafa Düğün Töreni') +
-        '&location=' + encodeURIComponent('Studio Necati Çekim Platosu, Harmanaağlı, Suluova, Amasya');
+        '&location=' + encodeURIComponent('Studio Necati Çekim Platosu, 40.7443428, 35.7488365');
       document.getElementById('btn-gcal').href = gcalUrl;
 
       const icsContent = [
@@ -985,7 +985,7 @@
         'DTEND:20260906T210000Z',
         'SUMMARY:Rafel & Mustafa Düğünü',
         'DESCRIPTION:Rafel & Mustafa Düğün Töreni',
-        'LOCATION:Studio Necati Çekim Platosu\\, Harmanaağlı\\, Suluova\\, Amasya',
+        'LOCATION:Studio Necati Çekim Platosu\\, 40.7443428\\, 35.7488365',
         'END:VEVENT',
         'END:VCALENDAR'
       ].join('\r\n');
@@ -999,7 +999,7 @@
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const container = document.getElementById('map-container');
-          container.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3000!2d35.7476669!3d40.7412282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40870d08bf351583%3A0xda55155485726295!2sStudio%20Necati%20%C3%87ekim%20Platosu!5e0!3m2!1str!2str" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>';
+          container.innerHTML = '<iframe src="https://www.google.com/maps?q=40.7443428,35.7488365&z=17&output=embed" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe>';
           mapObserver.disconnect();
         }
       });
